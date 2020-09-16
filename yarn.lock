@@ -5716,7 +5716,7 @@ interface-connection@~0.3.3:
   dependencies:
     pull-defer "~0.2.3"
 
-"interface-transport@github:libp2p/interface-transport#chore/skip-abort-while-reading-for-webrtc":
+interface-transport@libp2p/interface-transport#chore/skip-abort-while-reading-for-webrtc:
   version "0.7.0"
   resolved "https://codeload.github.com/libp2p/interface-transport/tar.gz/1dcdef69055c78a9fff96c6f24feb34ced0e5e9d"
   dependencies:

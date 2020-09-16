@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-const upgrader = require('./upgrader')
 const flags = require('flags')
 const WebRTCDirect = require('libp2p-webrtc-direct')
 const multiaddr = require('multiaddr')

@@ -15,7 +15,7 @@ const listening = flags.get(listenFlag)
 
 const maddr = multiaddr('/ip4/34.122.48.103/tcp/9090/http/p2p-webrtc-direct')
 
-const direct = new WebRTCDirect({ upgrader })
+ const direct = new WebRTCDirect({ upgrader })
 
 console.log('listening .........',listening)  
 if (listening) {
@@ -40,23 +40,30 @@ if (listening) {
     console.log('[listener] Listening')
   })
 } else {
-  direct.dial(maddr, { config: {} }, (err, conn) => {
-    if (err) {
-      console.log(`[dialer] Failed to open connection: ${err}`)
-    }
+(async function(){
+
+  try {
+    let conn = await direct.dial(maddr)
+
     console.log('[dialer] Opened connection')
 
     const muxer = mplex.dialer(conn)
-    const stream = muxer.newStream((err) => {
-      console.log('[dialer] Opened stream')
-      if (err) throw err
-    })
-
-    pull(
-      pull.values(['hey, how is it going. I am the dialer']),
-      stream
-    )
+   const stream = muxer.newStream((err) => {
+    console.log('[dialer] Opened stream')
+    if (err) throw err
   })
+
+  pull(
+    pull.values(['hey, how is it going. I am the dialer']),
+    stream
+  )
+  } catch (error) {
+      console.log(error);
+  }
+
+})();
+  
+  
 }
 
 
